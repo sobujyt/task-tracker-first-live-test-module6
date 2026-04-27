@@ -1,6 +1,6 @@
 import sys
 
-# surur list
+# প্রধান টাস্ক লিস্ট
 tasks = []
 
 def display_menu():
@@ -8,17 +8,25 @@ def display_menu():
     print("1. Add Task")
     print("2. View Tasks")
     print("3. Delete Task")
-    print("4. Mark Task as Completed")
+    print("4. Update Task Priority") # নতুন অপশন
     print("5. Exit")
 
 def add_task():
     title = input("Enter title: ")
     description = input("Enter description: ")
+    
+    # প্রায়োরিটি ইনপুট নেওয়া
+    print("Choose Priority: High, Medium, Low")
+    priority = input("Enter priority: ").capitalize()
+    
+    # ইনপুট ভ্যালিডেশন (ঐচ্ছিক কিন্তু ভালো)
+    if priority not in ["High", "Medium", "Low"]:
+        priority = "Medium" # ভুল ইনপুট দিলে ডিফল্ট মিডিয়াম সেট হবে
 
     task = {
         "title": title,
         "description": description,
-        "completed": False
+        "priority": priority
     }
     tasks.append(task)
     print("Task added successfully!")
@@ -30,9 +38,8 @@ def view_tasks():
     
     print("\nYour Tasks:")
     for index, task in enumerate(tasks, start=1):
-        # status check korar jonno
-        status = "[Completed]" if task["completed"] else "[Not Completed]"
-        print(f"{index}. {task['title']} - {task['description']} {status}")
+        # আউটপুট ফরম্যাট অনুযায়ী টাস্ক দেখানো
+        print(f"{index}. {task['title']} - {task['description']} [{task['priority']} Priority]")
 
 def delete_task():
     view_tasks()
@@ -47,17 +54,21 @@ def delete_task():
         except ValueError:
             print("Please enter a valid number.")
 
-def mark_completed():
+def update_priority():
     view_tasks()
     if not tasks:
         return
     
     try:
-        task_num = int(input("Enter task number to mark as completed: "))
+        task_num = int(input("Enter task number to update priority: "))
         if 1 <= task_num <= len(tasks):
-
-            tasks[task_num - 1]["completed"] = True
-            print("Task marked as completed!")
+            new_priority = input("Enter new priority (High/Medium/Low): ").capitalize()
+            
+            if new_priority in ["High", "Medium", "Low"]:
+                tasks[task_num - 1]["priority"] = new_priority
+                print("Task priority updated successfully!")
+            else:
+                print("Invalid priority! Use High, Medium, or Low.")
         else:
             print("Invalid task number.")
     except ValueError:
@@ -75,7 +86,7 @@ def main():
         elif choice == '3':
             delete_task()
         elif choice == '4':
-            mark_completed()
+            update_priority() # নতুন ফাংশন কল
         elif choice == '5':
             print("Exiting... Goodbye!")
             sys.exit()
