@@ -1,6 +1,6 @@
 import sys
 
-# main task list
+# Main task list - sob task ekhane thakbe
 tasks = []
 
 def display_menu():
@@ -8,20 +8,22 @@ def display_menu():
     print("1. Add Task")
     print("2. View Tasks")
     print("3. Delete Task")
-    print("4. Update Task Priority") # notun option
+    print("4. Update Task Priority") # Notun priority option
     print("5. Exit")
 
 def add_task():
     title = input("Enter title: ")
     description = input("Enter description: ")
     
-    # priority input nebo
+    # Priority input nebo user-er kach theke
     print("Choose Priority: High, Medium, Low")
     priority = input("Enter priority: ").capitalize()
     
+    # Jodi user vul kichu likhe, tahole default Medium set hobe
     if priority not in ["High", "Medium", "Low"]:
-        priority = "Medium" # vul input dile
+        priority = "Medium"
 
+    # Task dictionary te priority field add kora hoyeche
     task = {
         "title": title,
         "description": description,
@@ -37,7 +39,7 @@ def view_tasks():
     
     print("\nYour Tasks:")
     for index, task in enumerate(tasks, start=1):
-        # output format onujayi task dekhano
+        # Output format onujayi task list dekhano hoyeche
         print(f"{index}. {task['title']} - {task['description']} [{task['priority']} Priority]")
 
 def delete_task():
@@ -61,9 +63,11 @@ def update_priority():
     try:
         task_num = int(input("Enter task number to update priority: "))
         if 1 <= task_num <= len(tasks):
+            # Notun priority value input neoya hobe
             new_priority = input("Enter new priority (High/Medium/Low): ").capitalize()
             
             if new_priority in ["High", "Medium", "Low"]:
+                # Specific oi task-er priority update kora hobe
                 tasks[task_num - 1]["priority"] = new_priority
                 print("Task priority updated successfully!")
             else:
@@ -85,7 +89,7 @@ def main():
         elif choice == '3':
             delete_task()
         elif choice == '4':
-            update_priority() # new function
+            update_priority() # Priority update function call kora holo
         elif choice == '5':
             print("Exiting... Goodbye!")
             sys.exit()
@@ -94,5 +98,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
