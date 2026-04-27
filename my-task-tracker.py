@@ -1,6 +1,6 @@
 import sys
 
-# প্রধান টাস্ক লিস্ট
+# main task list
 tasks = []
 
 def display_menu():
@@ -8,20 +8,19 @@ def display_menu():
     print("1. Add Task")
     print("2. View Tasks")
     print("3. Delete Task")
-    print("4. Update Task Priority") # নতুন অপশন
+    print("4. Update Task Priority") # notun option
     print("5. Exit")
 
 def add_task():
     title = input("Enter title: ")
     description = input("Enter description: ")
     
-    # প্রায়োরিটি ইনপুট নেওয়া
+    # priority input nebo
     print("Choose Priority: High, Medium, Low")
     priority = input("Enter priority: ").capitalize()
     
-    # ইনপুট ভ্যালিডেশন (ঐচ্ছিক কিন্তু ভালো)
     if priority not in ["High", "Medium", "Low"]:
-        priority = "Medium" # ভুল ইনপুট দিলে ডিফল্ট মিডিয়াম সেট হবে
+        priority = "Medium" # vul input dile
 
     task = {
         "title": title,
@@ -38,7 +37,7 @@ def view_tasks():
     
     print("\nYour Tasks:")
     for index, task in enumerate(tasks, start=1):
-        # আউটপুট ফরম্যাট অনুযায়ী টাস্ক দেখানো
+        # output format onujayi task dekhano
         print(f"{index}. {task['title']} - {task['description']} [{task['priority']} Priority]")
 
 def delete_task():
@@ -86,7 +85,7 @@ def main():
         elif choice == '3':
             delete_task()
         elif choice == '4':
-            update_priority() # নতুন ফাংশন কল
+            update_priority() # new function
         elif choice == '5':
             print("Exiting... Goodbye!")
             sys.exit()
